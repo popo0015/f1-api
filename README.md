@@ -1,3 +1,10 @@
+<p align="center">
+  <img src="images/screen-1.png" alt="Image 1" width="200" />
+  <img src="images/screen-2.png" alt="Image 2" width="200" />
+  <img src="images/screen-3.png" alt="Image 3" width="200" />
+  <img src="images/screen-4.png" alt="Image 4" width="200" />
+</p>
+
 # Formula 1 Mobile App 🏁
 
 This project is a part of my first year ICT studies and aims to create a simple mobile app using HTML, Tailwind CSS, and JavaScript. The goal of the app is to implement the Ergast API to showcase information about Formula 1 races, drivers, and teams participating in the current year.
