@@ -255,7 +255,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
     try {
         if (path.includes('drivers.html')) {
-            const data = await fetchAndDisplaySortedDrivers();
             fetchAndDisplaySortedDrivers(2024);
         } else if (path.includes('driver-show.html')) {
             const driverId = urlParams.get('driverId');
