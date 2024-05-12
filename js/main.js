@@ -56,7 +56,7 @@ async function fetchAndDisplaySortedDrivers(year = 2024) {
  */
 function displayDrivers(drivers) {
     const container = document.createElement('div');
-    container.className = 'grid grid-cols-1 md:grid-cols-3 gap-4 p-4';
+    container.className = 'grid grid-cols-1 md:grid-cols-3 gap-4 p-4 animate-fadeIn';
     document.body.appendChild(container);
 
     drivers.forEach((driver, index) => {
@@ -86,7 +86,7 @@ function displayDrivers(drivers) {
  */
 function displayDriverDetails(driver) {
     const driverDetailsContainer = document.getElementById('driver-details');
-    driverDetailsContainer.className = 'mt-8 p-4 bg-black bg-opacity-90 rounded-lg shadow-lg flex flex-row items-center space-x-4';
+    driverDetailsContainer.className = 'mt-8 p-4 bg-black bg-opacity-90 rounded-lg shadow-lg flex flex-row items-center space-x-4 animate-fadeIn';
 
     driverDetailsContainer.innerHTML = `
         <div class="flex-shrink-0">
@@ -107,7 +107,7 @@ function displayDriverDetails(driver) {
 function displayConstructorsList(data) {
     const constructors = data.MRData.ConstructorTable.Constructors;
     const container = document.createElement('div');
-    container.className = 'grid grid-cols-1 md:grid-cols-3 gap-4 p-4';
+    container.className = 'grid grid-cols-1 md:grid-cols-3 gap-4 p-4 animate-fadeIn';
     constructors.forEach(constructor => {
         const card = document.createElement('div');
         card.className = "flex flex-wrap rounded-lg overflow-hidden shadow-xl transform hover:scale-105 transition duration-300 ease-in-out bg-black text-white m-2 p-4 hover:shadow-xl";
@@ -141,7 +141,7 @@ function displayConstructorsList(data) {
 function displayRaceCalendar(data) {
     const races = data.MRData.RaceTable.Races;
     const container = document.createElement('div');
-    container.className = 'grid grid-cols-1 md:grid-cols-3 gap-4 p-4';
+    container.className = 'grid grid-cols-1 md:grid-cols-3 gap-4 p-4 animate-fadeIn';
 
     const currentDate = new Date();
     let isNextRace = false;
@@ -251,7 +251,7 @@ function displayRaceDetails(race) {
             </table>`;
 
     raceDetailsContainer.innerHTML = `
-            <div class="relative">
+            <div class="relative animate-fadeIn">
                 <img src="/images/races/${race.Circuit.Location.locality.toLowerCase()}.jpg" alt="${race.raceName} Circuit" class="w-full rounded-lg shadow-md mb-6" />
                 <h2 class="absolute bottom-0 left-0 bg-red-600 text-white px-4 py-2 font-bold">${race.raceName}</h2>
             </div>
