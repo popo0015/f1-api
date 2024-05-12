@@ -252,7 +252,7 @@ function displayRaceDetails(race) {
 
     raceDetailsContainer.innerHTML = `
             <div class="relative">
-                <img src="/images/races/${race.Circuit.Location.locality}.jpg" alt="${race.raceName} Circuit" class="w-full rounded-lg shadow-md mb-6" />
+                <img src="/images/${race.Circuit.Location.locality}.jpg" alt="${race.raceName} Circuit" class="w-full rounded-lg shadow-md mb-6" />
                 <h2 class="absolute bottom-0 left-0 bg-red-600 text-white px-4 py-2 font-bold">${race.raceName}</h2>
             </div>
             <p><strong>Date:</strong> ${raceDate.toDateString()}</p>
