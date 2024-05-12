@@ -86,19 +86,17 @@ function displayDrivers(drivers) {
  */
 function displayDriverDetails(driver) {
     const driverDetailsContainer = document.getElementById('driver-details');
-    driverDetailsContainer.className = 'mt-8 p-4 bg-gray-800 bg-opacity-50 rounded-lg shadow-lg';
+    driverDetailsContainer.className = 'mt-8 p-4 bg-black bg-opacity-90 rounded-lg shadow-lg flex flex-row items-center space-x-4';
 
     driverDetailsContainer.innerHTML = `
-        <div class="flex flex-col md:flex-row items-center space-x-4">
-            <img src="/path/to/driverImage.jpg" alt="Profile Image" class="rounded-full w-48 h-48 shadow-lg">
-            <div>
-                <h2 class="text-2xl font-bold text-white mb-2">${driver.givenName} ${driver.familyName}</h2>
-                <p><strong>Nationality:</strong> ${driver.nationality}</p>
-                <p><strong>Race number:</strong> ${driver.permanentNumber}</p>
-                <p><strong>Points:</strong> ${driver.points || 'N/A'}</p>
-                <p><strong>Born:</strong> ${driver.dateOfBirth}</p>
-                <!-- Add more details here -->
-            </div>
+        <div class="flex-shrink-0">
+            <img width="128" height="128" src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/128/external-driver-motor-sports-flaticons-lineal-color-flat-icons-9.png" alt="Driver Icon"/>
+        </div>
+        <div class="flex-grow">
+            <h2 class="text-2xl font-bold text-yellow-300 mb-2">${driver.givenName} ${driver.familyName}</h2>
+            <p class="text-gray-400"><strong>Nationality:</strong> ${driver.nationality}</p>
+            <p class="text-gray-400"><strong>Race number:</strong> ${driver.permanentNumber}</p>
+            <p class="text-gray-400"><strong>Born:</strong> ${driver.dateOfBirth}</p>
         </div>`;
 }
 
