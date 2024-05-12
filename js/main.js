@@ -142,25 +142,41 @@ function displayRaceCalendar(data) {
     const races = data.MRData.RaceTable.Races;
     const container = document.createElement('div');
     container.className = 'grid grid-cols-1 md:grid-cols-3 gap-4 p-4';
+
+    const currentDate = new Date();
+    let isNextRace = false;
+
     races.forEach(race => {
+        const raceDate = new Date(race.date);
         const card = document.createElement('div');
-        card.className = "flex flex-wrap rounded-lg overflow-hidden shadow-xl transform hover:scale-105 transition duration-300 ease-in-out bg-black text-white m-2 p-4 hover:shadow-xl";
+        card.className = "flex flex-wrap rounded-lg overflow-hidden shadow-xl transform hover:scale-105 transition duration-300 ease-in-out bg-black text-white m-2 p-4 hover:shadow-xl relative";
         card.style = "background-image: url('https://hellof1.netlify.app/img/background.1bf89f69.png');";
 
         const raceLink = document.createElement('a');
         raceLink.href = `races-show.html?raceId=${race.round}`;
         raceLink.appendChild(card);
 
-        card.innerHTML = `<div class="flex-grow p-4 z-10">
-                            <h3 class="text-xl font-bold text-yellow-300">${race.raceName}</h3>
-                            <p class="text-gray-400">${race.date}</p>
-                        </div>
-                        <div class="absolute m-0 right-0 top-0 bottom-0 w-1/3 z-0" style="
-                        background-image: url('/images/f1_cartoon_logo.png');
-                        background-size: cover;
-                        background-repeat: no-repeat;
-                        background-position: right center;
-                        height: 100%;"></div>`;
+        let statusTag;
+        if (raceDate < currentDate) {
+            statusTag = `<div class="text-sm font-semibold bg-green-500 text-white py-1 px-3 rounded-lg">Finished</div>`;
+        } else if (!isNextRace && raceDate > currentDate) {
+            statusTag = `<div class="text-sm font-semibold bg-yellow-500 text-white py-1 px-3 rounded-lg">Next</div>`;
+            isNextRace = true;
+        } else {
+            statusTag = `<div class="text-sm font-semibold bg-blue-500 text-white py-1 px-3 rounded-lg">Upcoming</div>`;
+        }
+
+        card.innerHTML = `<div class="flex-grow p-4 z-10 relative">
+                    <h3 class="text-xl font-bold text-yellow-300">${race.raceName.replace('Grand Prix', 'GP')}</h3>
+                    <p class="text-gray-400">${race.date}</p>
+                    <div class="mt-2">${statusTag}</div>
+                  </div>
+                  <div class="absolute m-0 right-0 top-0 bottom-0 w-1/3 z-10" style="
+                  background-image: url('/images/f1_cartoon_logo.png');
+                  background-size: contain;
+                  background-repeat: no-repeat;
+                  background-position: center;
+                  height: 100%;"></div>`;
 
         container.appendChild(raceLink);
     });
