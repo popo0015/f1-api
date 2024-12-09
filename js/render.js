@@ -110,7 +110,7 @@ export function displayError(error) {
  */
 export function renderDriverDetails(driverData) {
     const driver = driverData.MRData.DriverTable.Drivers[0];
-    
+
     console.log(driver);
     const driverDetailsContainer = document.getElementById('driver-details');
     driverDetailsContainer.className = 'mt-8 p-4 bg-black bg-opacity-90 rounded-lg shadow-lg flex flex-row items-center space-x-4 animate-fadeIn';
@@ -127,13 +127,65 @@ export function renderDriverDetails(driverData) {
         </div>`;
 }
 
-// Function to render race details
+/**
+ * Renders the race details
+ * @param {*} raceData - the race details
+ */
 export function renderRaceDetails(raceData) {
-    const raceContainer = document.getElementById('raceDetails');
-    raceContainer.innerHTML = `
-        <h2>${raceData.raceName}</h2>
-        <p>Date: ${raceData.date}</p>
-        <p>Location: ${raceData.location}</p>
-        <p>Winner: ${raceData.winner}</p>
-    `;
+    const race = raceData.MRData.RaceTable.Races[0];
+    const raceDetailsContainer = document.getElementById('race-details');
+    const raceDate = getFormattedDate(race.date);
+
+    function formatTime(time) {
+        if (time && time.includes(':')) {
+            const timeParts = time.split(':');
+            return `${timeParts[0]}:${timeParts[1]}`;
+        }
+        return '';
+    }
+
+    function renderEventRow(eventName, eventData) {
+        if (eventData) {
+            return `
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2">${eventName}</td>
+                    <td class="border border-gray-300 px-4 py-2">${getFormattedDate(eventData.date)}</td>
+                    <td class="border border-gray-300 px-4 py-2">${formatTime(eventData.time)}</td>
+                </tr>
+            `;
+        }
+        return '';
+    }
+
+    const tableHTML = `
+        <table class="border-collapse border border-gray-300 mt-6 mb-10 w-full">
+            <thead>
+                <tr class="bg-red-600 text-white">
+                    <th class="border border-gray-300 px-4 py-2">Event</th>
+                    <th class="border border-gray-300 px-4 py-2">Date</th>
+                    <th class="border border-gray-300 px-4 py-2">Time</th>
+                </tr>
+            </thead>
+            <tbody class="table-font text-center">
+                ${renderEventRow('First Practice', race.FirstPractice)}
+                ${renderEventRow('Second Practice', race.SecondPractice)}
+                ${renderEventRow('Third Practice', race.ThirdPractice)}
+                ${renderEventRow('Qualifying', race.Qualifying)}
+                ${renderEventRow('Sprint', race.Sprint)}
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2">Race</td>
+                    <td class="border border-gray-300 px-4 py-2">${raceDate}</td>
+                    <td class="border border-gray-300 px-4 py-2">${formatTime(race.time)}</td>
+                </tr>
+            </tbody>
+        </table>`;
+
+    raceDetailsContainer.innerHTML = `
+        <div class="relative animate-fadeIn">
+            <img src="/images/races/${race.Circuit.Location.locality.toLowerCase()}.jpg" alt="${race.raceName} Circuit" class="w-full rounded-lg shadow-md mb-6" />
+            <h2 class="absolute bottom-0 left-0 bg-red-600 text-white px-4 py-2 font-bold">${race.raceName}</h2>
+        </div>
+        <p><strong>Date:</strong> ${raceDate}</p>
+        <p><strong>Location:</strong> ${race.Circuit.Location.locality}, ${race.Circuit.Location.country}</p>
+        ${tableHTML}`;
 }
