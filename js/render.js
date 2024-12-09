@@ -129,7 +129,7 @@ export function renderDriverDetails(driverData) {
 
 // Function to render race details
 export function renderRaceDetails(raceData) {
-    const raceContainer = document.getElementById('raceDetails'); // Example element
+    const raceContainer = document.getElementById('raceDetails');
     raceContainer.innerHTML = `
         <h2>${raceData.raceName}</h2>
         <p>Date: ${raceData.date}</p>

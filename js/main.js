@@ -1,10 +1,4 @@
-import {
-    fetchDriversList,
-    fetchDriverDetails,
-    fetchConstructorsList,
-    fetchRaceCalendar,
-    fetchDriverStandings
-} from './api.js';
+import { fetchDriversList, fetchDriverDetails, fetchConstructorsList, fetchRaceCalendar, fetchDriverStandings} from './api.js';
 
 import { renderDrivers, renderConstructors, renderRaceCalendar, displayError, renderRaceDetails, renderDriverDetails } from './render.js';
 
@@ -20,6 +14,8 @@ function init() {
         fetchAndDisplayRaceCalendar();
     } else if (page.includes('driver-show.html')) {
         fetchAndDisplayDeriverIndividual();
+    } else if (page.includes('races-show.html')) {
+        fetchRaceDetails();
     }
 }
 
@@ -89,6 +85,21 @@ async function fetchAndDisplayDeriverIndividual() {
         const driverId = urlParams.get('driverId');
         const driver = await fetchDriverDetails(driverId);
         renderDriverDetails(driver);
+    } catch (error) {
+        console.error('Failed to fetch driver details', error);
+        displayError(error);
+    }
+}
+
+/**
+ * Fetch and render the race details.
+ */
+async function fetchRaceDetails() {
+    const urlParams = new URLSearchParams(window.location.search);
+    try {
+        const raceId = urlParams.get('raceId');
+        const race = await renderRaceDetails(raceId);
+        renderRaceDetails(race);
     } catch (error) {
         console.error('Failed to fetch driver details', error);
         displayError(error);
